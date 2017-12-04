@@ -19,6 +19,14 @@ namespace eShoppingGatewaySvc.Controllers
         private readonly StatelessServiceContext serviceContext;
 
 
+        public ValuesController(HttpClient httpClient, StatelessServiceContext context, FabricClient fabricClient)
+        {
+            this.fabricClient = fabricClient;
+            this.httpClient = httpClient;
+            this.serviceContext = context;
+        }
+
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
