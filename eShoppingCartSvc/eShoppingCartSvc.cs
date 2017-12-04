@@ -34,7 +34,7 @@ namespace eShoppingCartSvc
                 new ServiceReplicaListener(serviceContext =>
                     new KestrelCommunicationListener(serviceContext, (url, listener) =>
                     {
-                        ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
+                        ServiceEventSource.Current.ServiceMessage(serviceContext,"ServiceEndpoint", $"Starting Kestrel on {url}");
 
                         return new WebHostBuilder()
                                     .UseKestrel()
