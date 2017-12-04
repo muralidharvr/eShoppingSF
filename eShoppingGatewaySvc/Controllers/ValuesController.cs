@@ -35,27 +35,27 @@ namespace eShoppingGatewaySvc.Controllers
         }
 
 
-
+        [HttpGet]
         public async Task<IActionResult> ShoppingCart()
         {
 
-            Uri serviceName = new Uri($"{this.serviceContext.CodePackageActivationContext.ApplicationName}/eShoppingCartSvc");
-            ServicePartitionList partitions = await this.fabricClient.QueryManager.GetPartitionListAsync(serviceName);
+            //Uri serviceName = new Uri($"{this.serviceContext.CodePackageActivationContext.ApplicationName}/eShoppingCartSvc");
+            //ServicePartitionList partitions = await this.fabricClient.QueryManager.GetPartitionListAsync(serviceName);
             List<KeyValuePair<string, int>> result = new List<KeyValuePair<string, int>>();
 
-            foreach (var partition in partitions)
-            {
+            //foreach (var partition in partitions)
+            //{
 
                 string requestUrl = "http://localhost:19081/eShoppingSF/eShoppingCartSvc/API/Values?PartitionKey=1&PartitionKind=Int64Range";
                 using (HttpResponseMessage response = await this.httpClient.GetAsync(requestUrl))
                 {
                     if (response.StatusCode != System.Net.HttpStatusCode.OK)
                     {
-                        continue;
+                        //continue;
                     }
                     result.AddRange(JsonConvert.DeserializeObject<List<KeyValuePair<string, int>>>(await response.Content.ReadAsStringAsync()));
                 }
-            }
+            //}
             return this.Json(result);
         }
 
