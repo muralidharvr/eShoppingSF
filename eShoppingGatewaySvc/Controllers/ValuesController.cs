@@ -45,6 +45,7 @@ namespace eShoppingGatewaySvc.Controllers
 
             foreach (var partition in partitions)
             {
+
                 string requestUrl = "http://localhost:19081/eShoppingSF/eShoppingCartSvc/API/Values?PartitionKey=1&PartitionKind=Int64Range";
                 using (HttpResponseMessage response = await this.httpClient.GetAsync(requestUrl))
                 {
